@@ -6,112 +6,80 @@
 /*   By: rnomoto <rnomoto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 15:46:31 by rnomoto           #+#    #+#             */
-/*   Updated: 2025/04/26 17:53:26 by rnomoto          ###   ########.fr       */
+/*   Updated: 2025/04/26 20:35:34 by rnomoto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdint.h>
+#include <stdlib.h>	
 
-void *ft_memset(void *mem, int c, size_t n)
+int push(int **from_p, int *from_size, int **to_p, int *to_size)
 {
-	unsigned char *mem_cast;
-	unsigned char c_cast;
-	size_t i;
+	int *tmp;
+	int i;
 
-	i = 0;
-	mem_cast = (unsigned char *)mem;
-	c_cast = (unsigned char)c;
-	while (i < n)
-	{
-		mem_cast[i] = c_cast;
-		i++;
-	}
-	return mem_cast;
-}
-
-void *ft_calloc(size_t nmemb, size_t size)
-{
-	size_t len;
-	char *ret;
-
-	len = nmemb * size;
-	if ((size != 0 && nmemb != 0) && SIZE_MAX < len)
-		return NULL;
-	else if (nmemb == 0 || size == 0)
-		len = 1;
-	ret = (char *)malloc(len);
-	if (ret == NULL)
-		return NULL;
-	ft_memset(ret, '\0', len);
-	return ret;
-}
-
-size_t ft_strlen(const char *s)
-{
-	size_t i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return i;
-}
-
-size_t ft_strlcpy(char *dst, const char *src, size_t size)
-{
-	size_t i;
-	size_t check;
-
-	i = 0;
-	check = ft_strlen(src);
-	if (size == 0)
-		return check;
-	while (src[i] != '\0' && size > 1)
-	{
-		dst[i] = src[i];
-		i++;
-		size--;
-	}
-	dst[i] = '\0';
-	return check;
-}	
-
-int push(char **start_p, char **goal_p)
-{
-	char *new_goal;
-
-	if (**start_p == '\0')
+	if (*from_size == 0)
 		return 0;
-	new_goal = (char *)ft_calloc(sizeof(char), ft_strlen(*goal_p) + 2);
-	if (new_goal == NULL)
+	tmp = (int *)malloc(sizeof(int) * (*to_size + 1));
+	if (tmp == NULL)
 		return -1;
-	*new_goal = **start_p;
-	ft_strlcpy(new_goal + 1, *goal_p, ft_strlen(*goal_p) + 1);
-	free(*goal_p);
-	*goal_p = new_goal;
-	*start_p = *start_p + 1;
+	tmp[0] = **from_p;
+	i = 0;
+	while (i < *to_size)
+	{
+		tmp[i + 1] = (*to_p)[i];
+		i++;
+	}
+	free(*to_p);
+	*to_p = tmp;
+	*to_size += 1;
+
+	*from_p = *from_p + 1;
+	*from_size -= 1;
 
 	return 0;
 }
 
-/*
+
 int main(void)
 {
-	char *stack_a = strdup("0123456789");
-	if (stack_a == NULL)
-		return 1;
-	char *stack_b = strdup("abcdefghij");
-	if (stack_b == NULL)
-		return free(stack_a), 1;
+	int a_size = 5;
+	int *stack_a = (int *)malloc(sizeof(int) * a_size);
+	int i = 0;
+	while (i < a_size)
+	{
+		stack_a[i] = i + 1;
+		i++;
+	}
+	int b_size = 4;
+	int *stack_b = (int *)malloc(sizeof(int) * b_size);
+	i = 0;
+	while (i < b_size)
+	{
+		stack_b[i] = i + 6;
+		i++;
+	}
 	
 	//pa (push a)
-	push(&stack_b, &stack_a);
-	printf("pa_a: %s\n", stack_a);
-	printf("pa_b: %s\n", stack_b);
+	push(&stack_b, &b_size, &stack_a, &a_size);
+	i = 0;
+	while (i < a_size)
+	{
+		printf("stack_a[%d]: %d\n", i, stack_a[i]);
+		i++;
+	}
+	printf("a_size: %d\n", a_size);
+	i = 0;
+	while (i < b_size)
+	{
+		printf("stack_b[%d]: %d\n", i, stack_b[i]);
+		i++;
+	}
+	printf("b_size: %d\n", b_size);
 
+	free(stack_a);
+	free(stack_b - 1);
 	return 0;
 }
-*/
+

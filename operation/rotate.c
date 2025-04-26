@@ -6,21 +6,21 @@
 /*   By: rnomoto <rnomoto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:54:48 by rnomoto           #+#    #+#             */
-/*   Updated: 2025/04/26 18:10:55 by rnomoto          ###   ########.fr       */
+/*   Updated: 2025/04/26 20:29:19 by rnomoto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 #include <stdio.h>
 
-void rotate(char *stack)
+void rotate(int *stack, int *size)
 {
-	char tmp;
-	size_t i;
+	int tmp;
+	int i;
 
 	i = 0;
 	tmp = stack[0];
-	while (stack[i + 1] != '\0')
+	while (i + 1 < *size)
 	{
 		stack[i] = stack[i + 1];
 		i++;
@@ -28,24 +28,20 @@ void rotate(char *stack)
 	stack[i] = tmp;
 }
 
-void rotate_both(char *stack_a, char *stack_b)
-{
-	rotate(stack_a);
-	rotate(stack_b);
-}
 
 int main(void)
 {
-	char stack_a[] = "0123456789";
-	char stack_b[] = "abcdefghij";
+	int size = 5;
+	int stack[] = {1, 2, 3, 4, 5};
 
-	rotate(stack_a);
-	printf("ra: %s\n", stack_a);
-
-	rotate_both(stack_a, stack_b);
-	printf("rr_a: %s\n", stack_a);
-	printf("rr_b: %s\n", stack_b);
-
+	rotate(stack, &size);
+	int i = 0;
+	while (i < size)
+	{
+		printf("stack[%d]: %d\n", i, stack[i]);
+		i++;
+	}
+	printf("size: %d\n", size);
 	return 0;
 }
 

@@ -6,7 +6,7 @@
 /*   By: rnomoto <rnomoto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 15:24:52 by rnomoto           #+#    #+#             */
-/*   Updated: 2025/04/26 15:26:58 by rnomoto          ###   ########.fr       */
+/*   Updated: 2025/04/26 20:48:21 by rnomoto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define PUSH_SWAP_H
 
 #include <unistd.h>
-
+#include <stdlib.h>
 
 
 #endif

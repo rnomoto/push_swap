@@ -6,32 +6,20 @@
 /*   By: rnomoto <rnomoto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 18:11:40 by rnomoto           #+#    #+#             */
-/*   Updated: 2025/04/26 18:29:38 by rnomoto          ###   ########.fr       */
+/*   Updated: 2025/04/26 20:41:34 by rnomoto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 #include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 
-size_t ft_strlen(const char *s)
+void r_rotate(int *stack, int *size)
 {
-	size_t i;
-
-	i = 0;
-	while(s[i] != '\0')
-		i++;
-	return i;
-}
-
-void r_rotate(char *stack)
-{
-	size_t i;
-	char tmp;
+	int i;
+	int tmp;
 
 
-	i = ft_strlen(stack) - 1;
+	i = *size - 1;
 	tmp = stack[i];
 	while (i > 0)
 	{
@@ -41,27 +29,18 @@ void r_rotate(char *stack)
 	stack[i] = tmp;
 }
 
-void r_rotate_both(char *stack_a, char *stack_b)
-{
-	r_rotate(stack_a);
-	r_rotate(stack_b);
-}
-
 int main(void)
 {
-	char *stack_a = strdup("0123456789");
-	char *stack_b = strdup("abcdefghij");
+	int stack[] = {1, 2, 3, 4, 5};
+	int size = 5;
 
-	r_rotate(stack_a);
-	printf("rra: %s\n", stack_a);
-
-	r_rotate_both(stack_a, stack_b);
-	printf("rrr_a: %s\n", stack_a);
-	printf("rrr_b: %s\n", stack_b);
-
-	free(stack_a);
-	free(stack_b);
-
+	r_rotate(stack, &size);
+	int i = 0;
+	while (i < size)
+	{
+		printf("stack[%d]: %d\n", i, stack[i]);
+		i++;
+	}
 	return 0;
 }
 
