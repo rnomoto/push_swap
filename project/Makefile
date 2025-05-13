@@ -20,9 +20,11 @@ $(TARGET): $(OBJS)
 all: $(TARGET)
 
 clean:
+	make -C $(LIBFT_DIR) clean
 	$(RM) $(OBJS)
 
 fclean: clean
+	make -C $(LIBFT_DIR) fclean
 	$(RM) $(TARGET)
 
 re: fclean all
